@@ -4,5 +4,5 @@ from . import serializers
 
 class EmployeeViewset(viewsets.ModelViewSet):
 	queryset = models.Employee.objects.all()
-	serializers_class = serializers.EmployeeSerializer
+	serializer_class = serializers.EmployeeSerializer
 
