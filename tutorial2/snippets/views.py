@@ -7,6 +7,7 @@ from rest_framework import generics, permissions, renderers, viewsets
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework import filters
 
 class SnippetViewSet(viewsets.ModelViewSet):
 	"""
@@ -17,6 +18,9 @@ class SnippetViewSet(viewsets.ModelViewSet):
 	queryset = Snippet.objects.all()
 	serializer_class = SnippetSerializer
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+	#filter_backends = [filters.OrderingFilter]
+	filterset_fields = ['language','linenos','owner']
+	ordering_fields = ['owner']
 
 	@action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
 	def highlight(self, request, *args, **kwargs):
